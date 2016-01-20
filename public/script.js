@@ -1,37 +1,39 @@
 window.onload = function() {
     var documentName = document.location.pathname.substring(1);
-    
-    var idElement = document.getElementById('id'); 
+
+    var pageNameElement = document.getElementById('page'); 
     
     if (documentName.length > 0) {
-        idElement.innerHTML = documentName;
+        pageNameElement.innerHTML = documentName;
     }
     
-    idElement.onfocus = function() {
+    // Select the page id field on focus
+    pageNameElement.onfocus = function() {
         window.setTimeout(function() {
             var sel, range;
             if (window.getSelection && document.createRange) {
                 range = document.createRange();
-                range.selectNodeContents(idElement);
+                range.selectNodeContents(pageNameElement);
                 sel = window.getSelection();
                 sel.removeAllRanges();
                 sel.addRange(range);
             } else if(document.body.createTextRange) {
                 range = document.body.createTextRange();
-                range.moveToElementText(idElement);
+                range.moveToElementText(pageNameElement);
                 range.select();
             }
         }, 1);
     };
-    idElement.onblur = function() {
+    // Reset the page id field
+    pageNameElement.onblur = function() {
         if(documentName.length > 0) {
-            idElement.innerHTML = documentName;
-        } else { idElement.innerHTML = '/'; }
+            pageNameElement.innerHTML = documentName;
+        } else { pageNameElement.innerHTML = '/'; }
     }
 
-    idElement.addEventListener('keypress', function(e) {
+    pageNameElement.addEventListener('keypress', function(e) {
         if(e.keyCode === 13) {
-            var noSlash = idElement.innerHTML.replace(/[\/]/g, '');
+            var noSlash = pageNameElement.innerHTML.replace(/[\/]/g, '');
             window.location.href = '/' + noSlash;
             e.preventDefault();
         }
@@ -39,6 +41,7 @@ window.onload = function() {
 
     var pad = document.getElementById('pad');
 
+    // Capture tab key
     pad.addEventListener('keydown',function(e) {
         if(e.keyCode === 9) {
             var start = this.selectionStart;
