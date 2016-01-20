@@ -1,0 +1,6 @@
+node_modules
+redis
+.env
+npm-debug.log*
+*.log
+.npm
