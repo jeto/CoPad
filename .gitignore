@@ -4,4 +4,3 @@ redis
 npm-debug.log*
 *.log
 .npm
-.gitignore
